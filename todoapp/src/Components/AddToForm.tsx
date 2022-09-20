@@ -1,5 +1,11 @@
 import React, { FormEvent, useState } from 'react'
-import { Button } from '@patternfly/react-core'
+import {
+  ActionGroup,
+  Button,
+  Form,
+  FormGroup,
+  TextInput,
+} from '@patternfly/react-core'
 
 interface Props {
   handleAdd: (todo: string) => void
@@ -7,30 +13,37 @@ interface Props {
 const AddToForm = ({ handleAdd }: Props) => {
   const [todo, setTodo] = useState<string>('')
 
-  const handleChange = (e: FormEvent<HTMLButtonElement>) => {
+  const addTask = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
     handleAdd(todo)
     setTodo('')
   }
 
+  const handleChange = (task: string) => {
+    setTodo(task)
+  }
+
   return (
     <>
-      <form>
-        {/* <TextInput type="text" aria-label="text input example" /> */}
-        <input
-          className="input"
-          type="text"
+      <Form isHorizontal style={{ justifyContent: 'center' }}>
+        <TextInput
+          style={{ width: '25rem' }}
           value={todo}
           placeholder="Enter a task"
-          onChange={(e) => {
-            setTodo(e.target.value)
-          }}
+          isRequired
+          type="text"
+          id="horizontal-form-name"
+          aria-describedby="horizontal-form-name-helper"
+          name="horizontal-form-name"
+          onChange={handleChange}
         />
 
-        <Button variant="primary" type="submit" onClick={handleChange}>
-          Add
-        </Button>
-      </form>
+        <ActionGroup>
+          <Button variant="primary" type="submit" onClick={addTask}>
+            Add
+          </Button>
+        </ActionGroup>
+      </Form>
     </>
   )
 }

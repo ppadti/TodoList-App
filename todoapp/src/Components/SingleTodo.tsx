@@ -1,6 +1,16 @@
+import {
+  Button,
+  Card,
+  Flex,
+  Form,
+  TextContent,
+  Text,
+  TextVariants,
+  TextInput,
+} from '@patternfly/react-core'
 import React, { FormEvent, useState } from 'react'
 import { Todo } from './Model'
-import '../index.css'
+// import '../index.css'
 
 type Props = {
   todo: Todo
@@ -24,48 +34,65 @@ const SingleTodo = ({
     handleEdit(id, editTodo)
     setEdit(false)
   }
-  return (
-    <form
-      className="todo__single"
-      onSubmit={(e) => {
-        handleEditOption(e, todo.id)
-      }}
-    >
-      {edit ? (
-        <input value={editTodo} onChange={(e) => setEditTodo(e.target.value)} />
-      ) : todo.isDone ? (
-        <s className="todo__single--text">{todo.todo}</s>
-      ) : (
-        <span className="todo__single--text">{todo.todo}</span>
-      )}
 
-      <div>
-        <span
-          className="option"
-          onClick={() => {
-            if (!edit && !todo.isDone) setEdit(!edit)
-          }}
-        >
-          Edit
-        </span>
-        <span
-          className="option"
-          onClick={() => {
-            handleDelete(todo.id)
-          }}
-        >
-          Delete
-        </span>
-        <span
-          className="option"
-          onClick={() => {
-            handleDone(todo.id)
-          }}
-        >
-          Done
-        </span>
-      </div>
-    </form>
+  const updateTask = (name: string) => {
+    setEditTodo(name)
+  }
+
+  return (
+    <Card style={{ width: '20rem', padding: '1rem', margin: '5rem' }}>
+      <Form
+        onSubmit={(e) => {
+          handleEditOption(e, todo.id)
+        }}
+      >
+        {edit ? (
+          <TextInput
+            value={editTodo}
+            type="text"
+            id="horizontal-form-name"
+            aria-describedby="horizontal-form-name-helper"
+            name="horizontal-form-name"
+            onChange={updateTask}
+          />
+        ) : todo.isDone ? (
+          <s>{todo.todo}</s>
+        ) : (
+          <TextContent>
+            <Text component={TextVariants.h2}>{todo.todo}</Text>
+          </TextContent>
+        )}
+
+        <Flex>
+          <Button
+            className="option"
+            onClick={() => {
+              if (!todo.isDone) setEdit(!edit)
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            variant="secondary"
+            isDanger
+            onClick={() => {
+              handleDelete(todo.id)
+            }}
+          >
+            Delete
+          </Button>
+          <Button
+            variant="primary"
+            style={{ width: '5rem' }}
+            onClick={() => {
+              handleDone(todo.id)
+            }}
+          >
+            Done
+          </Button>
+        </Flex>
+      </Form>
+    </Card>
   )
 }
 

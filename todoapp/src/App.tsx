@@ -1,9 +1,11 @@
 import '@patternfly/react-core/dist/styles/base.css'
 import './fonts.css'
+
 import React, { useState } from 'react'
 import AddToForm from './Components/AddToForm'
 import { Todo } from './Components/Model'
 import SingleTodo from './Components/SingleTodo'
+import { TextContent, Text, TextVariants } from '@patternfly/react-core'
 
 type AddTodo = (text: string) => void
 
@@ -38,9 +40,11 @@ function App() {
 
   return (
     <>
-      <div className="todo_list">
-        <b>TODO LIST</b>
-      </div>
+      <TextContent
+        style={{ textAlign: 'center', fontWeight: 'bold', padding: '2rem' }}
+      >
+        <Text component={TextVariants.h2}>TODO LIST</Text>
+      </TextContent>
       <AddToForm handleAdd={handleAdd} />
       {todos.map((todo) => (
         <SingleTodo

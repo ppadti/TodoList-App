@@ -5,7 +5,17 @@ import React, { useState } from 'react'
 import AddToForm from './Components/AddToForm'
 import { Todo } from './Components/Model'
 import SingleTodo from './Components/SingleTodo'
-import { TextContent, Text, TextVariants } from '@patternfly/react-core'
+import {
+  TextContent,
+  Text,
+  TextVariants,
+  PageSection,
+  PageSectionVariants,
+  Page,
+  Masthead,
+  MastheadMain,
+  MastheadBrand,
+} from '@patternfly/react-core'
 
 type AddTodo = (text: string) => void
 
@@ -37,15 +47,22 @@ function App() {
       ),
     )
   }
+  const header = (
+    <Masthead>
+      <MastheadMain>
+        <MastheadBrand href="#" target="_blank">
+          <TextContent>
+            <Text component={TextVariants.h2}>TODO LIST</Text>
+          </TextContent>
+        </MastheadBrand>
+      </MastheadMain>
+    </Masthead>
+  )
 
   return (
     <>
-      <TextContent
-        style={{ textAlign: 'center', fontWeight: 'bold', padding: '2rem' }}
-      >
-        <Text component={TextVariants.h2}>TODO LIST</Text>
-      </TextContent>
       <AddToForm handleAdd={handleAdd} />
+
       {todos.map((todo) => (
         <SingleTodo
           todo={todo}

@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import AddToForm from './Components/AddToForm'
 import { Todo } from './Components/Model'
 import SingleTodo from './Components/SingleTodo'
+
 import {
   TextContent,
   Text,
@@ -16,6 +17,7 @@ import {
   MastheadMain,
   MastheadBrand,
 } from '@patternfly/react-core'
+
 
 type AddTodo = (text: string) => void
 
@@ -62,7 +64,6 @@ function App() {
   return (
     <>
       <AddToForm handleAdd={handleAdd} />
-
       {todos.map((todo) => (
         <SingleTodo
           todo={todo}

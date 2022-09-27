@@ -76,8 +76,7 @@ const AddToForm = ({ handleAdd }: Props) => {
           </Form>
         </PageSection>
       </Page>
-    </>
-  )
+      )
 }
 
 export default AddToForm

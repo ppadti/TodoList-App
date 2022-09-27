@@ -6,13 +6,7 @@ import {
   TextContent,
   Text,
   TextVariants,
-  TextInput,
-  DescriptionListTerm,
-  DescriptionListDescription,
-  DescriptionList,
-  PageSection,
-  Page,
-  PageSectionVariants,
+  TextInput
 } from '@patternfly/react-core'
 import React, { FormEvent, useState } from 'react'
 import { Todo } from './Model'
@@ -99,6 +93,7 @@ const SingleTodo = ({
         </Form>
       </Card>
     </>
+
   )
 }
 
